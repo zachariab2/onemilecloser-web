@@ -231,6 +231,8 @@
     .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .pricing-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--clay); }
     .pricing-list li::before { content: "✓"; color: var(--rose); font-weight: 700; flex-shrink: 0; }
+    .pricing-list li.no { color: #bbb; }
+    .pricing-list li.no::before { content: "✕"; color: #ddd; font-weight: 700; }
     .pricing-cta {
       display: block; text-align: center;
       background: var(--dusk); color: white;
@@ -401,7 +403,7 @@
       <h3>Solo</h3>
       <p class="desc">Full access for one person</p>
       <div class="pricing-price">
-        <span class="pricing-amount">$5</span>
+        <span class="pricing-amount">$6.99</span>
         <span class="pricing-period">/month</span>
       </div>
       <p class="pricing-trial">7-day free trial included</p>
@@ -410,24 +412,26 @@
         <li>Streak tracking</li>
         <li>Memories archive</li>
         <li>Home screen widget</li>
+        <li class="no">Covers your partner</li>
         <li>Cancel anytime</li>
       </ul>
       <a class="pricing-cta" href="#download">Start free trial</a>
     </div>
-<div class="pricing-card featured">
+    <div class="pricing-card featured">
       <div class="pricing-badge">MOST POPULAR</div>
       <h3>Couple</h3>
       <p class="desc">One subscription covers both of you</p>
       <div class="pricing-price">
-        <span class="pricing-amount">$10</span>
+        <span class="pricing-amount">$12.99</span>
         <span class="pricing-period">/month</span>
       </div>
       <p class="pricing-trial">7-day free trial · your partner joins free</p>
       <ul class="pricing-list">
-        <li>Everything in Solo</li>
-        <li>Covers both partners</li>
-        <li>Partner skips paywall</li>
-        <li>One bill, two people</li>
+        <li>Daily video delivery</li>
+        <li>Streak tracking</li>
+        <li>Memories archive</li>
+        <li>Home screen widget</li>
+        <li>Covers your partner</li>
         <li>Cancel anytime</li>
       </ul>
       <a class="pricing-cta rose" href="#download">Start free trial</a>
