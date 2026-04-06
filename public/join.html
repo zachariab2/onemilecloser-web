@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Mile Closer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #302e40;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px;
+      text-align: center;
+    }
+    .heart { font-size: 64px; margin-bottom: 24px; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    p { font-size: 16px; opacity: 0.7; line-height: 1.5; margin-bottom: 32px; max-width: 320px; }
+    .btn {
+      display: inline-block;
+      background: #f07080;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+    }
+    .sub { margin-top: 16px; font-size: 13px; opacity: 0.45; }
+  </style>
+</head>
+<body>
+  <div class="heart">💌</div>
+  <h1>You've been invited.</h1>
+  <p>Your partner is waiting for you on One Mile Closer. Open the app to connect.</p>
+  <a class="btn" id="open-btn" href="#">Open App</a>
+  <p class="sub">Don't have it yet? Download on the App Store.</p>
+
+  <script>
+    const code = window.location.pathname.split('/join/')[1] || '';
+    document.getElementById('open-btn').href = 'onemilecloser://join/' + code;
+    // Try to open the app immediately
+    window.location = 'onemilecloser://join/' + code;
+  </script>
+</body>
+</html>

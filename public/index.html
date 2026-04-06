@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Mile Closer — Daily videos for couples apart</title>
+  <meta name="description" content="Record short clips throughout your day. We stitch them into one minute and deliver it to your person every night." />
+  <meta property="og:title" content="One Mile Closer" />
+  <meta property="og:description" content="The daily video ritual that makes long distance feel like the same room." />
+  <meta property="og:image" content="/og.png" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose:  #f07080;
+      --blush: #f9b4bc;
+      --dusk:  #302e40;
+      --clay:  #7a6e7e;
+      --shell: #fdf6f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--shell);
+      color: var(--dusk);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(253,246,240,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(240,112,128,0.1);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo span { font-size: 18px; font-weight: 700; color: var(--dusk); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 15px; color: var(--clay); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-cta {
+      background: var(--rose); color: white; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 600; padding: 10px 22px;
+      border-radius: 50px; text-decoration: none; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,112,128,0.18) 0%, transparent 70%);
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(240,112,128,0.12);
+      color: var(--rose); font-size: 13px; font-weight: 600;
+      padding: 7px 16px; border-radius: 50px;
+      border: 1px solid rgba(240,112,128,0.25);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--dusk);
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent { color: var(--rose); }
+
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--clay);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 44px;
+    }
+
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--dusk); color: white;
+      font-size: 16px; font-weight: 600;
+      padding: 16px 28px; border-radius: 16px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 8px 24px rgba(48,46,64,0.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(48,46,64,0.3); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: var(--dusk);
+      font-size: 16px; font-weight: 600;
+      padding: 16px 28px; border-radius: 16px;
+      text-decoration: none; transition: transform .2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); }
+
+    .hero-note {
+      margin-top: 20px;
+      font-size: 13px; color: var(--clay); opacity: 0.7;
+    }
+
+    /* ── PHONE MOCKUP ── */
+    .phone-wrap {
+      margin-top: 64px;
+      position: relative; display: inline-block;
+    }
+    .phone-frame {
+      width: 260px; height: 520px;
+      background: var(--dusk);
+      border-radius: 44px;
+      border: 8px solid #1e1c2e;
+      box-shadow: 0 40px 80px rgba(48,46,64,0.35), 0 0 0 1px rgba(255,255,255,0.08) inset;
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #302e40 0%, #3d1e28 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; padding: 24px;
+    }
+    .phone-heart { font-size: 52px; }
+    .phone-label {
+      color: white; font-size: 18px; font-weight: 700; text-align: center;
+      line-height: 1.3;
+    }
+    .phone-sub { color: rgba(255,255,255,0.5); font-size: 12px; text-align: center; }
+    .phone-notch {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 28px;
+      background: #1e1c2e;
+      border-radius: 0 0 18px 18px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .section { padding: 100px 24px; }
+    .section-label {
+      text-align: center; font-size: 13px; font-weight: 700;
+      color: var(--rose); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      text-align: center; font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -0.02em; color: var(--dusk);
+      max-width: 560px; margin: 0 auto 64px;
+      line-height: 1.2;
+    }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; max-width: 900px; margin: 0 auto;
+    }
+    .step-card {
+      background: white; border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: rgba(240,112,128,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: var(--rose);
+      margin-bottom: 18px;
+    }
+    .step-card h3 { font-size: 18px; font-weight: 700; color: var(--dusk); margin-bottom: 8px; }
+    .step-card p  { font-size: 15px; color: var(--clay); line-height: 1.6; }
+
+    /* ── FEATURES ── */
+    .features-bg {
+      background: var(--dusk);
+      padding: 100px 24px;
+    }
+    .features-bg .section-label { color: var(--blush); }
+    .features-bg .section-title { color: white; }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px; max-width: 900px; margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 28px;
+    }
+    .feature-icon { font-size: 28px; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 6px; }
+    .feature-card p  { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+    /* ── PRICING ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px; max-width: 860px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: white; border-radius: 28px; padding: 36px 32px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      border: 2px solid transparent;
+      position: relative; transition: transform .2s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured { border-color: var(--rose); }
+    .pricing-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--rose); color: white;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 5px 14px; border-radius: 50px; white-space: nowrap;
+    }
+    .pricing-card h3 { font-size: 20px; font-weight: 700; color: var(--dusk); margin-bottom: 6px; }
+    .pricing-card .desc { font-size: 14px; color: var(--clay); margin-bottom: 24px; }
+    .pricing-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 6px; }
+    .pricing-amount { font-size: 40px; font-weight: 800; color: var(--dusk); }
+    .pricing-period { font-size: 15px; color: var(--clay); }
+    .pricing-trial { font-size: 13px; color: var(--rose); font-weight: 600; margin-bottom: 28px; }
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .pricing-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--clay); }
+    .pricing-list li::before { content: "✓"; color: var(--rose); font-weight: 700; flex-shrink: 0; }
+    .pricing-cta {
+      display: block; text-align: center;
+      background: var(--dusk); color: white;
+      font-size: 15px; font-weight: 600; padding: 14px;
+      border-radius: 14px; margin-top: 28px;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .pricing-cta:hover { opacity: 0.85; }
+    .pricing-cta.rose { background: var(--rose); }
+    .pricing-note { text-align: center; font-size: 13px; color: var(--clay); margin-top: 20px; opacity: 0.7; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px; max-width: 900px; margin: 0 auto;
+    }
+    .testimonial {
+      background: white; border-radius: 20px; padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .stars { color: #f5c542; font-size: 14px; margin-bottom: 12px; }
+    .testimonial p { font-size: 15px; color: var(--clay); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+    .testimonial-author { font-size: 13px; font-weight: 600; color: var(--dusk); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--dusk) 0%, #4a1e2e 100%);
+      padding: 100px 24px; text-align: center;
+    }
+    .cta-banner h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.2; }
+    .cta-banner p  { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 44px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dusk); padding: 40px 24px;
+      display: flex; flex-wrap: wrap; gap: 20px;
+      align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo span { color: white; font-size: 16px; font-weight: 700; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: rgba(255,255,255,0.45); font-size: 14px; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: white; }
+    .footer-copy { color: rgba(255,255,255,0.25); font-size: 13px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .section { padding: 72px 20px; }
+      .features-bg { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <span>💌 One Mile Closer</span>
+  </a>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <a class="nav-cta" href="#download">Download</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pill">
+    ❤️ Made for long-distance couples
+  </div>
+  <h1>One mile apart.<br><span class="accent">One minute closer</span>, every night.</h1>
+  <p>Record short clips throughout your day. We stitch them into one video and deliver it to your person every night — automatically.</p>
+  <div class="hero-buttons">
+    <a class="btn-primary" href="#download" id="appstore-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on iPhone
+    </a>
+    <a class="btn-secondary" href="#how-it-works">See how it works</a>
+  </div>
+  <p class="hero-note">Free 7-day trial · No credit card required to start</p>
+
+  <div class="phone-wrap">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-heart">💌</div>
+        <div class="phone-label">A new video<br>from Alex</div>
+        <div class="phone-sub">Just arrived · 1 min ago</div>
+        <div style="margin-top:12px; background:rgba(240,112,128,0.2); border:1px solid rgba(240,112,128,0.4); border-radius:50px; padding:10px 24px; color:#f9b4bc; font-size:14px; font-weight:600;">Watch now ▶</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">Three steps. Every night.</h2>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h3>Record your day</h3>
+      <p>Tap to capture short clips throughout your day — morning coffee, a walk, saying goodnight. No editing needed.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h3>We stitch it together</h3>
+      <p>At your chosen time each night, we automatically stitch your clips into one ~60 second video and send it.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h3>They watch. You connect.</h3>
+      <p>Your partner gets a notification, watches your day, and reacts instantly. Then they send theirs back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-bg" id="features">
+  <p class="section-label">Everything included</p>
+  <h2 class="section-title" style="color:white;">Built for the long haul</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <h3>Daily streaks</h3>
+      <p>Build momentum together. Streak milestones at 7, 30, 100 days keep the ritual alive.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <h3>Miles apart, shown</h3>
+      <p>See exactly how many miles separate you — and feel them shrinking one minute at a time.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>Video requests</h3>
+      <p>Ask your partner to show you something specific — "show me your commute" or "I want to see your view."</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🗓</div>
+      <h3>Reunion countdown</h3>
+      <p>A live countdown to the next time you're together. Because every day crossed off matters.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💌</div>
+      <h3>Memories archive</h3>
+      <p>Save any video to your private archive. Scroll back to any night, any moment.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🖼</div>
+      <h3>Home screen widget</h3>
+      <p>Streak, countdown, or distance — keep your relationship on your lock screen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Simple. Affordable. Worth every cent.</h2>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Solo</h3>
+      <p class="desc">Full access for one person</p>
+      <div class="pricing-price">
+        <span class="pricing-amount">$5</span>
+        <span class="pricing-period">/month</span>
+      </div>
+      <p class="pricing-trial">7-day free trial included</p>
+      <ul class="pricing-list">
+        <li>Daily video delivery</li>
+        <li>Streak tracking</li>
+        <li>Memories archive</li>
+        <li>Home screen widget</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <a class="pricing-cta" href="#download">Start free trial</a>
+    </div>
+    <div class="pricing-card">
+      <h3>Annual</h3>
+      <p class="desc">Best value — one year, two people</p>
+      <div class="pricing-price">
+        <span class="pricing-amount">$84</span>
+        <span class="pricing-period">/year</span>
+      </div>
+      <p class="pricing-trial">Save 30% vs monthly · both partners covered</p>
+      <ul class="pricing-list">
+        <li>Everything in Couple</li>
+        <li>30% cheaper than monthly</li>
+        <li>One payment, one year</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <a class="pricing-cta" href="#download">Start free trial</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">MOST POPULAR</div>
+      <h3>Couple</h3>
+      <p class="desc">One subscription covers both of you</p>
+      <div class="pricing-price">
+        <span class="pricing-amount">$10</span>
+        <span class="pricing-period">/month</span>
+      </div>
+      <p class="pricing-trial">7-day free trial · your partner joins free</p>
+      <ul class="pricing-list">
+        <li>Everything in Solo</li>
+        <li>Covers both partners</li>
+        <li>Partner skips paywall</li>
+        <li>One bill, two people</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <a class="pricing-cta rose" href="#download">Start free trial</a>
+    </div>
+  </div>
+  <p class="pricing-note">Available on iPhone · Subscriptions managed through the App Store</p>
+</section>
+
+<!-- TESTIMONIALS (placeholder — swap for real ones) -->
+<section class="section" style="background: white; padding-top: 80px; padding-bottom: 80px;">
+  <p class="section-label">From couples like yours</p>
+  <h2 class="section-title">They used to text. Now they send their day.</h2>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"I've tried every couple app. This is the only one we've actually kept up with. 47-day streak and counting."</p>
+      <div class="testimonial-author">— Maya & Jordan, 1,400 miles apart</div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"Watching his video every night before bed makes the distance feel manageable. It's become my favorite part of the day."</p>
+      <div class="testimonial-author">— Priya, long distance for 8 months</div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"The couple plan is genius — I paid for both of us and now she has no excuse not to send her day."</p>
+      <div class="testimonial-author">— Tyler, Chicago → London</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="download">
+  <h2>Start your 7-day free trial.<br>No credit card needed.</h2>
+  <p>Download free. Your first week is on us.</p>
+  <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+    <a class="btn-primary" href="https://apps.apple.com/app/one-mile-closer" style="background:white; color:var(--dusk);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on iPhone
+    </a>
+  </div>
+  <p style="margin-top:20px; font-size:13px; color:rgba(255,255,255,0.35);">iOS only · Requires iPhone · Both partners need the app</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <span>💌 One Mile Closer</span>
+  </div>
+  <div class="footer-links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="mailto:hello@onemilecloser.online">Support</a>
+  </div>
+  <p class="footer-copy">© 2026 One Mile Closer · onemilecloser.online</p>
+</footer>
+
+</body>
+</html>
